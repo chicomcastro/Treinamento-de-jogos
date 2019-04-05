@@ -6,18 +6,33 @@ public class Follower : MonoBehaviour
 {
     public Transform target;
     public float smoothSpeed = 0.125f;
-    public Vector3 offset;
 
     public float tolerance;
-    private bool isFixedUpdate = false;
+    private float t0;
+    private float offset;
+    private bool haveMoved = false;
 
-    
-    void FixedUpdate()
+    void Update()
     {
-        Vector3 desiredPosition = target.position + offset;
+        if (Mathf.Abs(transform.position.y - target.position.y) < tolerance && !haveMoved)
+        {
+            offset = transform.position.y - target.position.y;
+            t0 = Time.time;
+            return;
+        }
+        else
+        {
+            haveMoved = true;
+            float t = Time.time - t0;
+            float w = 0.01f;
+            offset *= Mathf.Pow((2.71f), -w * t) * Mathf.Cos(w * t);
+            offset += tolerance * (1 - Mathf.Pow((2.71f), -w * t));
+        }
+
+        Vector3 desiredPosition = target.position;
+        desiredPosition.y += offset;
         desiredPosition.z = transform.position.z;
 
-		Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-		transform.position = smoothedPosition;
+        transform.position = desiredPosition;
     }
 }

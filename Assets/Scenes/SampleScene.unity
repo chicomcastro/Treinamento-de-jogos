@@ -153,8 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1801892084}
   smoothSpeed: 0.125
-  offset: {x: 0, y: 1, z: 0}
-  tolerance: 1
+  tolerance: 3
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -237,7 +236,7 @@ PrefabInstance:
     - target: {fileID: 4686913277362544919, guid: 80563e085da210047b089e43c9c60000,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.06
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4686913277362544919, guid: 80563e085da210047b089e43c9c60000,
         type: 3}

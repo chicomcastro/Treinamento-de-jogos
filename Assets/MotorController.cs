@@ -18,14 +18,17 @@ public class MotorController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        // rb.velocity = new Vector3(0,10,0);
+        // return;
+
         if (Input.GetButton("Vertical"))
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0, propellerForce));
             if (GetComponent<Rigidbody2D>().mass > rocketMass)
             {
-                propellerMass -= (float)0.1 * Time.fixedDeltaTime;
+                propellerMass -= (float)0.1 * Time.deltaTime;
             }
             GetComponent<Rigidbody2D>().mass = rocketMass + propellerMass;
         }
